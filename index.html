@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://www.lncc.br/~borges/php/testar.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&#127801;&#10024;</title>
+  <link rel="stylesheet" href="./index_files/css2"> <!-- Importando a fonte "Pacifico" do Google Fonts -->
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    #content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+    }
+
+    #fixedText {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #title {
+      font-family: 'Pacifico', cursive; /* Fonte personalizada "Pacifico" para as palavras da animação */
+    }
+
+    #repeatButton {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="moon" width="1324" height="962"></canvas>
+  <div id="content">
+    <p id="fixedText">Para Amanda Elpidio</p>
+    <h1 id="title">Obrigado por não desistir de mim e continuar aqui mesmo comigo sendo às vezes chato &#10084;&#65039;</h1>
+    <button id="repeatButton" style="display: inline;">Repetir Animação</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('moon');
+    const ctx = canvas.getContext('2d');
+    let moonImage = new Image();
+    moonImage.src = 'https://mfiles.alphacoders.com/999/999881.jpg';
+
+    function setCanvasSize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', setCanvasSize);
+    setCanvasSize();
+
+    function drawMoon() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(moonImage, 0, 0, canvas.width, canvas.height);
+    }
+
+    moonImage.onload = () => {
+      drawMoon();
+    };
+
+    const title = document.getElementById('title');
+    const text = 'Obrigado por não desistir de mim e continuar aqui mesmo comigo sendo às vezes chato &#10084;&#65039;';
+    let index = 0;
+
+    function typeText() {
+      title.textContent = text.slice(0, index);
+      index++;
+
+      if (index <= text.length) {
+        setTimeout(typeText, 100);
+      } else {
+        document.getElementById('repeatButton').style.display = 'inline';
+      }
+    }
+
+    typeText();
+
+    const repeatButton = document.getElementById('repeatButton');
+    repeatButton.addEventListener('click', () => {
+      index = 0;
+      typeText();
+      repeatButton.style.display = 'none';
+    });
+
+    canvas.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+    });
+  </script>
+
+
+
+</body></html>
